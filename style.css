@@ -30,3 +30,7 @@ body {
    margin: 10px;
    border: solid yellow 5px;
 }
+
+.correct-answer {
+    background-color: coral;
+}
