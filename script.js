@@ -12,6 +12,8 @@ function addGenre() {
 
     levels.forEach(level => {
         const card = document.createElement('div')
+        card.classList.add('card')
+        column.append(card)
 
         fetch(`https://opentdb.com/api.php?amount=1&category=11&difficulty=${level}&type=boolean`)
         .then(Response => Response.json())
