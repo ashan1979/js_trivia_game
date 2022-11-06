@@ -1,13 +1,19 @@
 const game = document.getElementById('game');
-const scoreDisplay = document.getElementById('score');
+const scoreDisplay = document.getElementById('score')
 
-const film = 11;
-const levels = ['easy', 'medium', 'hard'];
+const genres = [
+    {
+        name: 'Film',
+        id: 11
 
-function addGenre() {
+    }
+]
+const levels = ['easy', 'medium', 'hard']
+
+function addGenre(genre) {
     const column = document.createElement('div')
     column.classList.add('genre-column')
-    column.innerHTML = 'this is a genre'
+    column.innerHTML = genre.name
     game.append(column)
 
     levels.forEach(level => {
@@ -15,13 +21,33 @@ function addGenre() {
         card.classList.add('card')
         column.append(card)
 
-        fetch(`https://opentdb.com/api.php?amount=1&category=11&difficulty=${level}&type=boolean`)
+        if(level === 'easy') {
+            card.innerHTML = 100
+        }
+
+        if(level === 'medium') {
+            card.innerHTML = 200
+        }
+
+        if(level === 'hard') {
+            card.innerHTML = 300
+        }
+
+        fetch(`https://opentdb.com/api.php?amount=1&category=${genre.id}&difficulty=${level}&type=boolean`)
         .then(Response => Response.json())
         .then(data => {
             console.log(data)
             card.setAttribute('data-question', data.results[0].question)
+            card.setAttribute('data-answer', data.results[0].correct_answer)
+            card.setAttribute('data-value', card.getInnerHTML())
         })
+        card.addEventListener('click', flipCard)
+
     })
 }
 
-addGenre()
+addGenre(genres[0])
+
+function flipCard() {
+    console.log('clicked')
+}
