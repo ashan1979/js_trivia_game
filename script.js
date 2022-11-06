@@ -6,7 +6,26 @@ const genres = [
         name: 'Film',
         id: 11
 
-    }
+    },
+
+    {
+        name: 'Books',
+        id: 10
+
+    },
+
+    {
+        name: 'Music',
+        id: 12
+
+    },
+
+    {
+        name: 'Video Games',
+        id: 15
+
+    },
+
 ]
 const levels = ['easy', 'medium', 'hard']
 
@@ -46,8 +65,15 @@ function addGenre(genre) {
     })
 }
 
-addGenre(genres[0])
+genres.forEach(genre => addGenre(genre))
 
 function flipCard() {
     console.log('clicked')
+    const textDisplay = document.createElement('div')
+    const trueButton = document.createElement('button')
+    const falseButton = document.createElement('button')
+    trueButton.innerHTML = 'True'
+    falseButton.innerHTML = 'False'
+    textDisplay.innerHTML = this.getAttribute('data-question')
+    this.append(textDisplay, trueButton, falseButton)
 }
