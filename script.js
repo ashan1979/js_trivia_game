@@ -12,6 +12,8 @@ function addGenre() {
 
     levels.forEach(level => {
         fetch(`https://opentdb.com/api.php?amount=1&category=${genre.id}&difficulty=${level}&type=boolean`)
+        .then(Response => Response.json())
+        .then(data => console.log(data))
     })
 }
 
