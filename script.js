@@ -90,5 +90,13 @@ function getResult() {
         score = score + parseInt(cardOfButton.getAttribute('data-value'))
         scoreDisplay.innerHTML = score
         cardOfButton.classList.add('correct-answer')
+        setTimeout(() => {
+            while (cardOfButton.firstChild) {
+                cardOfButton.removeChild(cardOfButton.lastChild)
+            }
+            cardOfButton.innerHTML = cardOfButton.getAttribute('data-value')
+        }, 100)
+    } else {
+        cardOfButton.classList.add('wrong-answer')
     }
 }
