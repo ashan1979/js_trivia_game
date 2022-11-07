@@ -29,6 +29,7 @@ body {
    padding: 5px;
    margin: 10px;
    border: solid yellow 5px;
+   font-size: 100px;
 }
 
 .correct-answer {
@@ -37,4 +38,16 @@ body {
 
 .wrong-answer {
     background-color: #c73b1e;
+}
+
+.true-button {
+    background-color: cadetblue;
+}
+
+.false-button {
+    background-color: #c73b1e;
+}
+
+button {
+    margin: 5px;
 }

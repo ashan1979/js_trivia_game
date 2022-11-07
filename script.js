@@ -61,7 +61,7 @@ function addGenre(genre) {
             card.setAttribute('data-answer', data.results[0].correct_answer)
             card.setAttribute('data-value', card.getInnerHTML())
         })
-        card.addEventListener('click', flipCard)
+        .then(done => card.addEventListener('click', flipCard))
 
     })
 }
@@ -69,12 +69,15 @@ function addGenre(genre) {
 genres.forEach(genre => addGenre(genre))
 
 function flipCard() {
-    console.log('clicked')
+    this.innerHTML = ''
+    this.style.fontSize = '15px'
     const textDisplay = document.createElement('div')
     const trueButton = document.createElement('button')
     const falseButton = document.createElement('button')
     trueButton.innerHTML = 'True'
     falseButton.innerHTML = 'False'
+    trueButton.classList.add('true-button')
+    falseButton.classList.add('false-button')
     trueButton.addEventListener('click', getResult)
     falseButton.addEventListener('click', getResult)
     textDisplay.innerHTML = this.getAttribute('data-question')
