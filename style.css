@@ -34,3 +34,7 @@ body {
 .correct-answer {
     background-color: coral;
 }
+
+.wrong-answer {
+    background-color: #c73b1e;
+}

@@ -85,6 +85,9 @@ function flipCard() {
 }
 
 function getResult() {
+    const allCards = Array.from(document.querySelectorAll('.card'))
+    allCards,forEach(card => card.addEventListener('click', flipCard))
+
     const cardOfButton = this.parentElement
     if (cardOfButton.getAttribute('data-answer') === this.innerHTML) {
         score = score + parseInt(cardOfButton.getAttribute('data-value'))
@@ -98,5 +101,12 @@ function getResult() {
         }, 100)
     } else {
         cardOfButton.classList.add('wrong-answer')
+        setTimeout(() => {
+            while (cardOfButton, firstChild) {
+                cardOfButton.removeChild(cardOfButton.lastChild)
+            }
+            cardOfButton.innerHTML = 0
+        }, 100)
     }
+    cardOfButton.removeEventListener('click', flipCard)
 }
