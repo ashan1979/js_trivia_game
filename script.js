@@ -1,33 +1,26 @@
-const game = document.getElementById('game');
+const game = document.getElementById('game')
 const scoreDisplay = document.getElementById('score')
 let score = 0
 
 const genres = [
     {
-        name: 'Film',
-        id: 11
-
-    },
-
-    {
         name: 'Books',
         id: 10
-
     },
-
+    {
+        name: 'Film',
+        id: 11
+    },
     {
         name: 'Music',
         id: 12
-
     },
-
     {
         name: 'Video Games',
         id: 15
-
-    },
-
+    }
 ]
+
 const levels = ['easy', 'medium', 'hard']
 
 function addGenre(genre) {
@@ -41,32 +34,36 @@ function addGenre(genre) {
         card.classList.add('card')
         column.append(card)
 
-        if(level === 'easy') {
+        if (level === 'easy') {
             card.innerHTML = 100
         }
-
-        if(level === 'medium') {
+        if (level === 'medium') {
             card.innerHTML = 200
         }
-
-        if(level === 'hard') {
+        if (level === 'hard') {
             card.innerHTML = 300
         }
 
         fetch(`https://opentdb.com/api.php?amount=1&category=${genre.id}&difficulty=${level}&type=boolean`)
-        .then(Response => Response.json())
-        .then(data => {
-            console.log(data)
-            card.setAttribute('data-question', data.results[0].question)
-            card.setAttribute('data-answer', data.results[0].correct_answer)
-            card.setAttribute('data-value', card.getInnerHTML())
-        })
-        .then(done => card.addEventListener('click', flipCard))
+            .then(response => response.json())
+            .then(data => {
+                // Not enough data to get 10 items per difficulty level and get a random
+                // question using Math.random() and passing it through instead of 0
+                // eg: if amount=10 above, you could do:
+                // cont randomNumber = Math.floor(Math.random() * 10)
+                // and pass through randomNumber, so:
+                // data.results[randomNumber].question
+                console.log(data)
+                card.setAttribute('data-question', data.results[0].question)
+                card.setAttribute('data-answer', data.results[0].correct_answer)
+                card.setAttribute('data-value', card.getInnerHTML())
+            })
+            .then(done => card.addEventListener('click', flipCard))
 
     })
 }
-
 genres.forEach(genre => addGenre(genre))
+
 
 function flipCard() {
     this.innerHTML = ''
@@ -89,7 +86,7 @@ function flipCard() {
 
 function getResult() {
     const allCards = Array.from(document.querySelectorAll('.card'))
-    allCards,forEach(card => card.addEventListener('click', flipCard))
+    allCards.forEach(card => card.addEventListener('click', flipCard))
 
     const cardOfButton = this.parentElement
     if (cardOfButton.getAttribute('data-answer') === this.innerHTML) {
@@ -105,11 +102,11 @@ function getResult() {
     } else {
         cardOfButton.classList.add('wrong-answer')
         setTimeout(() => {
-            while (cardOfButton, firstChild) {
+            while (cardOfButton.firstChild) {
                 cardOfButton.removeChild(cardOfButton.lastChild)
             }
             cardOfButton.innerHTML = 0
         }, 100)
     }
-    cardOfButton.removeEventListener('click', flipCard)
+    cardOfButton.removeEventListener('click',flipCard)
 }
